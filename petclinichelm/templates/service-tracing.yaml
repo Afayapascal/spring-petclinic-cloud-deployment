@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "petclinichelm.fullname" . }}-cast
+  namespace: {{ .Values.tracing.namespace }}
+  labels:
+    {{- include "petclinichelm.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.tracing.service.type }}
+  ports:
+    - port: {{ .Values.tracing.service.port }}
+      targetPort: {{ .Values.tracing.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "petclinichelm.selectorLabels" . | nindent 4 }}

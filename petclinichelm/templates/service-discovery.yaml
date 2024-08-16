@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "petclinichelm.fullname" . }}-cast
+  namespace: {{ .Values.discovery.namespace }}
+  labels:
+    {{- include "petclinichelm.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.discovery.service.type }}
+  ports:
+    - port: {{ .Values.discovery.service.port }}
+      targetPort: {{ .Values.discovery.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "petclinichelm.selectorLabels" . | nindent 4 }}

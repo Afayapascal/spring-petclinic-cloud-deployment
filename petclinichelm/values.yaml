@@ -1,5 +1,5 @@
 admin:
-   namespace: dev
+   namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-admin-server
    tag: "latest"
@@ -20,7 +20,7 @@ admin:
 #       value: http://cast_service:8000/api/v1/casts/
 
 gateway:
-   namespace: dev
+   namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-api-gateway
    tag: "latest"
@@ -37,7 +37,7 @@ gateway:
  
 
 vet:
-   namespace: dev
+   namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-vets-service
    tag: "latest"
@@ -53,7 +53,7 @@ vet:
      enabled: false
  
 visit:
-   namespace: dev
+   namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--visits-service
    tag: "latest"
@@ -69,7 +69,7 @@ visit:
      enabled: false
 
 discovery:
-   namespace: dev
+   namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-discovery-server
    tag: "latest"
@@ -85,7 +85,7 @@ discovery:
      enabled: false
 
 config:
-   namespace: dev
+   namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--config-server
    tag: "latest"
@@ -101,7 +101,7 @@ config:
      enabled: false
 
 tracing:
-   namespace: dev
+   namespace: prod
    replicas: 1
    image: openzipkin/zipkin
    tag: "latest"
@@ -115,7 +115,6 @@ tracing:
      enabled: false
    autoscaling:
      enabled: false
- env:
+   env:
      - name: JAVA_OPTS
        value: -XX:+UnlockExperimentalVMOptions -Djava.security.egd=file:/dev/./urandom
-
