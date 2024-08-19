@@ -71,13 +71,8 @@ visit:
 discovery:
    namespace: prod
    replicas: 1
-<<<<<<< HEAD
    image: foker84/spring-petclinic-cloud-discovery-service
    tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
-=======
-   image: foker84/spring-petclinic-cloud-discovery-server
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
->>>>>>> 56c4d736c72d3040adb7674ec04bd339be4d7523
    pullPolicy: IfNotPresent
    service:
      type: NodePort
