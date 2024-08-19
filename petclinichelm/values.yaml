@@ -2,7 +2,16 @@ admin:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-admin-server
+<<<<<<< HEAD
    tag: d528e5c8c46f5caf6d37ea89739c18e61e8a9463
+=======
+<<<<<<< HEAD
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+#   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+=======
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+>>>>>>> 56c4d736c72d3040adb7674ec04bd339be4d7523
+>>>>>>> bb9065817f5ae343e18eafd074fe3126f16b5c97
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -23,7 +32,7 @@ gateway:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-api-gateway
-   tag: d528e5c8c46f5caf6d37ea89739c18e61e8a9463
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -40,7 +49,7 @@ vet:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-vets-service
-   tag: d528e5c8c46f5caf6d37ea89739c18e61e8a9463
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -56,7 +65,7 @@ visit:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--visits-service
-   tag: d528e5c8c46f5caf6d37ea89739c18e61e8a9463
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -73,10 +82,10 @@ discovery:
    replicas: 1
 <<<<<<< HEAD
    image: foker84/spring-petclinic-cloud-discovery-service
-   tag: 89cc63c8e010662829c3b872ad1a830e9c5e95d8
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
 =======
    image: foker84/spring-petclinic-cloud-discovery-server
-   tag: d528e5c8c46f5caf6d37ea89739c18e61e8a9463
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
 >>>>>>> 56c4d736c72d3040adb7674ec04bd339be4d7523
    pullPolicy: IfNotPresent
    service:
@@ -93,7 +102,7 @@ config:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--config-server
-   tag: d528e5c8c46f5caf6d37ea89739c18e61e8a9463
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -109,7 +118,7 @@ tracing:
    namespace: prod
    replicas: 1
    image: openzipkin/zipkin
-   tag: d528e5c8c46f5caf6d37ea89739c18e61e8a9463
+   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
    pullPolicy: IfNotPresent
    service:
      type: NodePort
