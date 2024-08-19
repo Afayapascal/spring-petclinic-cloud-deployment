@@ -2,16 +2,7 @@ admin:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-admin-server
-<<<<<<< HEAD
-   tag: d528e5c8c46f5caf6d37ea89739c18e61e8a9463
-=======
-<<<<<<< HEAD
    tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
-#   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
-=======
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
->>>>>>> 56c4d736c72d3040adb7674ec04bd339be4d7523
->>>>>>> bb9065817f5ae343e18eafd074fe3126f16b5c97
    pullPolicy: IfNotPresent
    service:
      type: NodePort
