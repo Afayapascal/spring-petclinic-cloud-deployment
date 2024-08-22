@@ -2,7 +2,7 @@ admin:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-admin-server
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -23,7 +23,7 @@ gateway:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-api-gateway
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -40,7 +40,7 @@ vet:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-vets-service
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -56,7 +56,7 @@ visit:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--visits-service
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -72,7 +72,7 @@ discovery:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-discovery-service
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -88,7 +88,7 @@ config:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--config-server
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -104,7 +104,7 @@ tracing:
    namespace: prod
    replicas: 1
    image: openzipkin/zipkin
-   tag: a5e67a26192dbbb6747e8611266a4ba96dcb3e4e
+   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    pullPolicy: IfNotPresent
    service:
      type: NodePort
