@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "petclinichelm.fullname" . }}
+  name: {{ include "petclinichelm.fullname" . }}-traacing
   namespace: {{ .Values.tracing.namespace }}
   labels:
     {{- include "petclinichelm.labels" . | nindent 4 }}
