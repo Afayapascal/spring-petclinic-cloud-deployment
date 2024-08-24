@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "petclinichelm.fullname" . }}-traacing
-  namespace: {{ .Values.tracing.namespace }}
+  name: {{ include "petclinichelm.fullname" . }}-customer
+  namespace: {{ .Values.customer.namespace }}
   labels:
     {{- include "petclinichelm.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.tracing.autoscaling.enabled }}
+  {{- if not .Values.customer.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
@@ -36,23 +36,27 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.tracing.image }}:{{ .Values.tracing.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.tracing.pullPolicy }}
+          image: "{{ .Values.customer.image }}:{{ .Values.customer.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.customer.pullPolicy }}
           env:
-            {{- range .Values.tracing.env }}
+            {{- range .Values.customer.env }}
             - name: {{ .name }}
               value: {{ .value }}
             {{- end }} 
 {{/*          ports:
             - name: http
-              containerPort: {{ .Values.tracing.service.containerPort }}
+              containerPort: {{ .Values.customer.service.containerPort }}
               protocol: TCP */}}
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            limits:
+              memory: {{ .Values.customer.resources.limits.memory }} 
+            requests: 
+              cpu: {{ .Values.customer.resources.requests.cpu }}
+              memory: {{ .Values.customer.resources.requests.memory }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}

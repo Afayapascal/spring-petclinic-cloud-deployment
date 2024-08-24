@@ -29,6 +29,12 @@ gateway:
      type: NodePort
      port: 8080
      targetPort: 8080
+   resources:
+     limits:
+       memory: 1Gi
+     requests:
+       cpu: 2000m
+       memory: 1Gi
    
    ingress:
      enabled: false
@@ -46,6 +52,12 @@ vet:
      type: NodePort
      port: 8083
      targetPort: 8083
+   resources:
+     limits:
+       memory: 1Gi
+     requests:
+       cpu: 2000m
+       memory: 1Gi
    
    ingress:
      enabled: false
@@ -62,6 +74,12 @@ visit:
      type: NodePort
      port: 8082
      targetPort: 8082
+   resources:
+     limits:
+       memory: 1Gi
+     requests:
+       cpu: 2000m
+       memory: 1Gi
    
    ingress:
      enabled: false
@@ -100,16 +118,24 @@ config:
    autoscaling:
      enabled: false
 
-tracing:
+customer:
    namespace: prod
    replicas: 1
-   image: openzipkin/zipkin
+#   image: openzipkin/zipkin
+#   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+   image: foker84/spring-petclinic-cloud-customer-service
    tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    pullPolicy: IfNotPresent
    service:
      type: NodePort
-     port: 9411
-     targetPort: 9411
+     port: 8080
+     targetPort: 8080
+   resources:
+     limits:
+       memory: 1Gi
+     requests:
+       cpu: 200m
+       memory: 1Gi
    
    ingress:
      enabled: false

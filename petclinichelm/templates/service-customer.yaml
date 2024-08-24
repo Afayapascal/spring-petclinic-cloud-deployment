@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "petclinichelm.fullname" . }}-customer
+  namespace: {{ .Values.customer.namespace }}
+  labels:
+    {{- include "petclinichelm.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.customer.service.type }}
+  ports:
+    - port: {{ .Values.customer.service.port }}
+      targetPort: {{ .Values.customer.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "petclinichelm.selectorLabels" . | nindent 4 }}
