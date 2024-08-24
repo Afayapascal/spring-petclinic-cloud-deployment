@@ -2,7 +2,7 @@ admin:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-admin-server
-   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+   tag: be21cca3ea80735130c08b41a112cba799c170a8
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -23,7 +23,7 @@ gateway:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-api-gateway
-   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+   tag: be21cca3ea80735130c08b41a112cba799c170a8
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -46,7 +46,7 @@ vet:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-vets-service
-   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+   tag: be21cca3ea80735130c08b41a112cba799c170a8
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -68,7 +68,7 @@ visit:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--visits-service
-   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+   tag: be21cca3ea80735130c08b41a112cba799c170a8
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -90,7 +90,7 @@ discovery:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-discovery-service
-   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+   tag: be21cca3ea80735130c08b41a112cba799c170a8
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -106,7 +106,7 @@ config:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--config-server
-   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+   tag: be21cca3ea80735130c08b41a112cba799c170a8
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -121,10 +121,15 @@ config:
 customer:
    namespace: prod
    replicas: 1
+<<<<<<< HEAD
 #   image: openzipkin/zipkin
 #   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    image: foker84/spring-petclinic-cloud-customer-service
    tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+=======
+   image: openzipkin/zipkin
+   tag: be21cca3ea80735130c08b41a112cba799c170a8
+>>>>>>> 5dc2b4505279fbc12d52c06f00869d9dafc60a77
    pullPolicy: IfNotPresent
    service:
      type: NodePort
