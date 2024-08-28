@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "petclinichelm.fullname" . }}-visit
-  namespace: {{ .Values.vet.namespace }}
+  name: {{ include "petclinichelm.fullname" . }}-wavefront
+  namespace: {{ .Values.wavefront.namespace }}
   labels:
-    {{- include "petclinichelm.labels" . | nindent 4 }}
+    {{- include "petclinichelm.labels" . | nindent 4 }}-wavefront
 spec:
-  {{- if not .Values.vet.autoscaling.enabled }}
+  {{- if not .Values.wavefront.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
@@ -28,38 +28,29 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-{{/*  serviceAccountName: {{ include "petclinichelm.serviceAccountName" . }} 
-*/}}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.vet.image }}:{{ .Values.vet.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.vet.pullPolicy }}
+          image: "{{ .Values.wavefront.image }}:{{ .Values.wavefront.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.wavefront.pullPolicy }}
           env:
-            {{- range .Values.vet.env }}
+            {{- range $key, $value := $.Values.wavefront.env }}
             - name: {{ .name }}
               value: {{ .value }}
             {{- end }}
           envFrom:
             - secretRef:
-                name: {{ .Values.secretvets.name }} 
-{{/*          ports:
-            - name: http
-              containerPort: {{ .Values.vet.service.containerPort }}
-              protocol: TCP */}}
+                {{- range $key, $secret := $.Values.wavefront.envFrom.secretRef }}
+                - name: {{ .name }}
+                  value: {{ .value }}
+                {{- end }} 
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
-            limits:
-              memory: {{ .Values.vet.resources.limits.memory }}
-            requests:
-              cpu: {{ .Values.vet.resources.requests.cpu }}
-              memory: {{ .Values.vet.resources.requests.memory }}
+            {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}

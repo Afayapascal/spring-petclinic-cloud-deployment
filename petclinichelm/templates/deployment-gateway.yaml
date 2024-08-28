@@ -38,11 +38,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.gateway.image }}:{{ .Values.gateway.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.gateway.pullPolicy }}
- {{/*         env:
+          env:
             {{- range .Values.gateway.env }}
             - name: {{ .name }}
               value: {{ .value }}
-            {{- end }}  */}} 
+            {{- end }} 
 {{/*          ports:
             - name: http
               containerPort: {{ .Values.gateway.service.containerPort }}

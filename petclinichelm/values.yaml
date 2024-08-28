@@ -1,3 +1,27 @@
+secretvisit:
+  name: visits-db-mysql
+  namespace: prod
+  key: bXlzcWwtcm9vdC1wYXNzd29yZA==
+
+secretvets:
+  name: vets-db-mysql
+  namespace: prod
+  key: bXlzcWwtcm9vdC1wYXNzd29yZA==
+
+secretcustomer:
+  name: customers-db-mysql
+  namespace: prod
+  key: bXlzcWwtcm9vdC1wYXNzd29yZA==
+
+secretwavefront:
+  namespace: prod
+  name: wavefront
+  keys:
+    - name: WAVEFRONT_TOKEN
+      key: wavefront-api-token
+    - name: WAVEFRONT_URL
+      key: wavefront-url
+
 admin:
    namespace: prod
    replicas: 1
@@ -13,11 +37,6 @@ admin:
      enabled: false
    autoscaling:
      enabled: false
- #  env:
-  #   - name: DATABASE_URI
-  #     value: postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev
-#     - name: CAST_SERVICE_HOST_URL
-#       value: http://cast_service:8000/api/v1/casts/
 
 gateway:
    namespace: prod
@@ -40,8 +59,12 @@ gateway:
      enabled: false
    autoscaling:
      enabled: false
+   env:
+     - name: SPRING_PROFILES_ACTIVE
+       value: kubernetes
+     - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI
+       value: proxy://wavefront-proxy.spring-petclinic.svc.cluster.local:2878
  
-
 vet:
    namespace: prod
    replicas: 1
@@ -63,6 +86,19 @@ vet:
      enabled: false
    autoscaling:
      enabled: false
+   env:
+     - name: SPRING_PROFILES_ACTIVE
+       value: kubernetes
+     - name: SPRING_DATASOURCE_URL
+       value: jdbc:mysql://vets-db-mysql.spring-petclinic.svc.cluster.local:3306/service_instance_db?queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor&zipkinServiceName=vets-db
+     - name: SPRING_DATASOURCE_USERNAME
+       value: root
+     - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI
+       value: proxy://wavefront-proxy.spring-petclinic.svc.cluster.local:2878
+   envFrom:
+     - configMapRef:
+         name: vets-db-mysql
+
  
 visit:
    namespace: prod
@@ -85,6 +121,18 @@ visit:
      enabled: false
    autoscaling:
      enabled: false
+   env:
+     - name: SPRING_PROFILES_ACTIVE
+       value: kubernetes
+     - name: SPRING_DATASOURCE_URL
+       value: jdbc:mysql://visits-db-mysql.spring-petclinic.svc.cluster.local:3306/service_instance_db?queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor&zipkinServiceName=visits-db
+     - name: SPRING_DATASOURCE_USERNAME
+       value: root
+     - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI
+       value: proxy://wavefront-proxy.spring-petclinic.svc.cluster.local:2878
+   envFrom:
+     - configMapRef: 
+         name: visits-db-mysql
 
 discovery:
    namespace: prod
@@ -121,15 +169,10 @@ config:
 customer:
    namespace: prod
    replicas: 1
-<<<<<<< HEAD
 #   image: openzipkin/zipkin
 #   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
    image: foker84/spring-petclinic-cloud-customer-service
    tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
-=======
-   image: openzipkin/zipkin
-   tag: be21cca3ea80735130c08b41a112cba799c170a8
->>>>>>> 5dc2b4505279fbc12d52c06f00869d9dafc60a77
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -147,5 +190,57 @@ customer:
    autoscaling:
      enabled: false
    env:
-     - name: JAVA_OPTS
-       value: -XX:+UnlockExperimentalVMOptions -Djava.security.egd=file:/dev/./urandom
+     - name: SPRING_PROFILES_ACTIVE
+       value: kubernetes
+     - name: SPRING_DATASOURCE_URL
+       value: jdbc:mysql://customers-db-mysql.spring-petclinic.svc.cluster.local:3306/service_instance_db?queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor&zipkinServiceName=customers-db
+     - name: SPRING_DATASOURCE_USERNAME
+       value: root
+     - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI
+       value: proxy://wavefront-proxy.spring-petclinic.svc.cluster.local:2878
+   envFrom:
+     - configMapRef:
+         name: customers-db-mysql
+
+wavefront:
+   namespace: prod
+   replicas: 1
+   image: wavefronthq/proxy
+   tag: latest
+   pullPolicy: Always
+   securityContext: 
+     privileged: false
+   ports:
+     - containerPort: 2878
+       protocol: TCP
+     - containerPort: 9411
+       protocol: TCP
+   env:
+     - name: WAVEFRONT_PROXY_ARGS
+       value: --traceZipkinListenerPorts 9411 --traceZipkinApplicationName spring-petclinic-k8s
+   envFrom:
+#     - name:WAVEFRONT_TOKEN  
+     secretRef:
+       - name: wavefront
+#             - WAVEFRONT_TOKEN
+#             - wavefront_url
+#     - name: WAVEFRONT_URL
+#       secretRef:
+#         name: wavefront
+
+   service:
+     type: NodePort
+     ports:
+       - name: http  
+         port: 9411
+         targetPort: 9411
+         protocol: TCP
+       - name: wavefront
+         port: 2878
+         protocol: TCP
+
+   ingress:
+     enabled: false
+   autoscaling:
+     enabled: false
+

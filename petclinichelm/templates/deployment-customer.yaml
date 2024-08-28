@@ -42,7 +42,11 @@ spec:
             {{- range .Values.customer.env }}
             - name: {{ .name }}
               value: {{ .value }}
-            {{- end }} 
+            {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.secretcustomer.name }}
+ 
 {{/*          ports:
             - name: http
               containerPort: {{ .Values.customer.service.containerPort }}

@@ -38,11 +38,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.visit.image }}:{{ .Values.visit.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.visit.pullPolicy }}
- {{/*         env:
+          env:
             {{- range .Values.visit.env }}
             - name: {{ .name }}
               value: {{ .value }}
-            {{- end }} */}}
+            {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.secretvisit.name }} 
 {{/*          ports:
             - name: http
               containerPort: {{ .Values.visit.service.containerPort }}
@@ -53,10 +56,10 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             limits:
-              memory: {{ .Values.vet.resources.limits.memory }}
+              memory: {{ .Values.visit.resources.limits.memory }}
             requests:
-              cpu: {{ .Values.vet.resources.requests.cpu }}
-              memory: {{ .Values.vet.resources.requests.memory }}
+              cpu: {{ .Values.visit.resources.requests.cpu }}
+              memory: {{ .Values.visit.resources.requests.memory }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
