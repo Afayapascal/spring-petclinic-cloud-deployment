@@ -39,12 +39,20 @@ spec:
             - name: {{ .name }}
               value: {{ .value }}
             {{- end }}
-          envFrom:
+            {{- range $key, $secret := $.Values.wavefront.envFrom }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .valueFrom.secretKeyRef.name }}
+                  key: {{ .valueFrom.secretKeyRef.key }}
+            {{- end }}
+{{/*          envFrom:
             - secretRef:
                 {{- range $key, $secret := $.Values.wavefront.envFrom.secretRef }}
                 - name: {{ .name }}
                   value: {{ .value }}
-                {{- end }} 
+                {{- end }}
+*/}} 
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:

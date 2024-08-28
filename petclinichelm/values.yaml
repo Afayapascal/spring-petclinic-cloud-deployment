@@ -16,11 +16,9 @@ secretcustomer:
 secretwavefront:
   namespace: prod
   name: wavefront
-  keys:
-    - name: WAVEFRONT_TOKEN
-      key: wavefront-api-token
-    - name: WAVEFRONT_URL
-      key: wavefront-url
+  data:
+    username: wavefront-url
+    password: c3VwZXItc2VjcmV0LXBhc3N3b3Jk
 
 admin:
    namespace: prod
@@ -218,10 +216,20 @@ wavefront:
    env:
      - name: WAVEFRONT_PROXY_ARGS
        value: --traceZipkinListenerPorts 9411 --traceZipkinApplicationName spring-petclinic-k8s
-   envFrom:
-#     - name:WAVEFRONT_TOKEN  
-     secretRef:
-       - name: wavefront
+   envFrom: 
+#     secretRef:
+#       - name: wavefront
+     - name: WAVEFRONT_URL
+       valueFrom: 
+         secretKeyRef:
+           name: wavefront
+           key: wavefront-url
+     - name: WAVEFRONT_TOKEN
+       valueFrom: 
+         secretKeyRef:
+           name: wavefront  
+           key: wavefront-api-token
+
 #             - WAVEFRONT_TOKEN
 #             - wavefront_url
 #     - name: WAVEFRONT_URL
