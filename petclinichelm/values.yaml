@@ -24,7 +24,7 @@ admin:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-admin-server
-   tag: be21cca3ea80735130c08b41a112cba799c170a8
+   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -40,7 +40,7 @@ gateway:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-api-gateway
-   tag: be21cca3ea80735130c08b41a112cba799c170a8
+   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -67,7 +67,7 @@ vet:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-vets-service
-   tag: be21cca3ea80735130c08b41a112cba799c170a8
+   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -102,7 +102,7 @@ visit:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--visits-service
-   tag: be21cca3ea80735130c08b41a112cba799c170a8
+   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -136,7 +136,7 @@ discovery:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud-discovery-service
-   tag: be21cca3ea80735130c08b41a112cba799c170a8
+   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -152,7 +152,7 @@ config:
    namespace: prod
    replicas: 1
    image: foker84/spring-petclinic-cloud--config-server
-   tag: be21cca3ea80735130c08b41a112cba799c170a8
+   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -168,9 +168,9 @@ customer:
    namespace: prod
    replicas: 1
 #   image: openzipkin/zipkin
-#   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+#   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    image: foker84/spring-petclinic-cloud-customer-service
-   tag: 51327d88e34b05985bde9e57e0aac1d17ab058e5
+   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    pullPolicy: IfNotPresent
    service:
      type: NodePort
@@ -204,7 +204,7 @@ wavefront:
    namespace: prod
    replicas: 1
    image: wavefronthq/proxy
-   tag: latest
+   tag: 04fd31d9db611ad998b3ca0ef5e0ef48edc4305c
    pullPolicy: Always
    securityContext: 
      privileged: false
